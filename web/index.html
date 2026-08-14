@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>UserService Console</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Sora:wght@400;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/static/styles.css" />
+</head>
+<body>
+  <div class="bg" aria-hidden="true"></div>
+
+  <header class="top">
+    <div class="brand">
+      <span class="brand-mark">gRPC</span>
+      <h1>UserService Console</h1>
+    </div>
+    <p class="lede">在浏览器里直接调用 UserService 的 RPC（经本地 HTTP 网关）。</p>
+    <div class="status-row">
+      <span id="health" class="pill">checking…</span>
+      <span class="hint">gRPC :50051 · Web :8080</span>
+    </div>
+  </header>
+
+  <main class="layout">
+    <section class="panel" data-rpc="CreateUser">
+      <div class="panel-head">
+        <h2>CreateUser</h2>
+        <code>POST /api/users</code>
+      </div>
+      <label>name <input id="create-name" value="Alice" /></label>
+      <label>email <input id="create-email" value="alice@example.com" /></label>
+      <button type="button" data-action="create">发送</button>
+    </section>
+
+    <section class="panel" data-rpc="GetUser">
+      <div class="panel-head">
+        <h2>GetUser</h2>
+        <code>GET /api/users/{id}</code>
+      </div>
+      <label>id <input id="get-id" placeholder="usr_1" /></label>
+      <button type="button" data-action="get">发送</button>
+    </section>
+
+    <section class="panel" data-rpc="ListUsers">
+      <div class="panel-head">
+        <h2>ListUsers</h2>
+        <code>GET /api/users</code>
+      </div>
+      <label>page_size <input id="list-size" type="number" value="10" min="1" max="100" /></label>
+      <label>page_token <input id="list-token" placeholder="可选" /></label>
+      <button type="button" data-action="list">发送</button>
+    </section>
+
+    <section class="panel" data-rpc="UpdateUser">
+      <div class="panel-head">
+        <h2>UpdateUser</h2>
+        <code>PUT /api/users/{id}</code>
+      </div>
+      <label>id <input id="update-id" placeholder="usr_1" /></label>
+      <label>name <input id="update-name" value="Alice W" /></label>
+      <label>email <input id="update-email" value="alice.w@example.com" /></label>
+      <button type="button" data-action="update">发送</button>
+    </section>
+
+    <section class="panel" data-rpc="DeleteUser">
+      <div class="panel-head">
+        <h2>DeleteUser</h2>
+        <code>DELETE /api/users/{id}</code>
+      </div>
+      <label>id <input id="delete-id" placeholder="usr_1" /></label>
+      <button type="button" class="danger" data-action="delete">发送</button>
+    </section>
+
+    <section class="output panel">
+      <div class="panel-head">
+        <h2>Response</h2>
+        <button type="button" class="ghost" id="clear-out">清空</button>
+      </div>
+      <pre id="out" aria-live="polite">等待请求…</pre>
+    </section>
+  </main>
+
+  <script src="/static/app.js"></script>
+</body>
+</html>
